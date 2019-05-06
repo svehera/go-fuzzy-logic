@@ -1,4 +1,4 @@
-package pi
+package appr
 
 // Triangular represents triangular Pi-approximation membership function
 func Triangular(x []float64, a, b, c float64) []float64 {

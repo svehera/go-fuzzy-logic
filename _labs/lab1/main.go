@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
+
+	util "github.com/svehera/go-fuzzy-logic/util"
 )
 
-const Experts = 100
+const Experts = 5
 
 func main() {
 	//	fmt.Printf("%v\n", expertTab.Affilation)
@@ -14,10 +15,11 @@ func main() {
 	//	fmt.Printf("%v\n", expertTab.ResultTable)
 	//	fmt.Printf("%v\n", expertTab.Core)
 
+	util.SliceAsTable(expertTab.ResultTable)
 	fmt.Printf("%v\n", expertTab.Membership)
 
 	http.HandleFunc("/", drawMembershipFunction)
 	http.HandleFunc("/trian", drawApproximationTriangle)
 	http.HandleFunc("/trap", drawApproximationTrapeze)
-	log.Fatal(http.ListenAndServe(":8000", nil))
+	//log.Fatal(http.ListenAndServe(":8000", nil))
 }
