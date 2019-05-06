@@ -1,8 +1,14 @@
 package util
 
 import (
+	"errors"
 	"fmt"
 	"sort"
+)
+
+var (
+	ErrMinGreaterMax = errors.New("min greater than max")
+	ErrMinZeroValue  = errors.New("min equal zero")
 )
 
 func MapKeys(m map[float64]float64) []float64 {
@@ -32,7 +38,13 @@ func MaxInSlice(slice []float64) (float64, bool) {
 	return max, false
 }
 
-func SetHeights(minHeight, maxHeight, increment int) (heights []float64) {
+func SetHeights(minHeight, maxHeight, increment uint8) (heights []float64, err error) {
+	if minHeight == 0 {
+		return nil, ErrMinZeroValue
+	}
+	if minHeight > maxHeight {
+		return nil, ErrMinGreaterMax
+	}
 	for h := minHeight; h <= maxHeight; h += increment {
 		heights = append(heights, float64(h))
 	}
