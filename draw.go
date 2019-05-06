@@ -7,7 +7,7 @@ import (
 	chart "github.com/wcharczuk/go-chart"
 )
 
-func drawChart(series []chart.Series) chart.Chart {
+func DrawChart(series []chart.Series) chart.Chart {
 	graph := chart.Chart{
 		XAxis: chart.XAxis{
 			Style: chart.StyleShow(),
@@ -30,7 +30,7 @@ func drawChart(series []chart.Series) chart.Chart {
 	return graph
 }
 
-func drawContinuousSeries(name string, xValues, yValues []float64) chart.Series {
+func DrawContinuousSeries(name string, xValues, yValues []float64) chart.Series {
 	series := chart.ContinuousSeries{
 		Name:    name,
 		XValues: xValues,
@@ -43,7 +43,7 @@ func drawContinuousSeries(name string, xValues, yValues []float64) chart.Series 
 	return series
 }
 
-func renderChart(graph chart.Chart, res http.ResponseWriter) {
+func RenderChart(graph chart.Chart, res http.ResponseWriter) {
 	res.Header().Set("Content-Type", chart.ContentTypeSVG)
 	err := graph.Render(chart.SVG, res)
 	if err != nil {

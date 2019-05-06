@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	//"log"
 	"net/http"
 
 	util "github.com/svehera/go-fuzzy-logic/util"

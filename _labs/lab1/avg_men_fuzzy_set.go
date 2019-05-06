@@ -50,42 +50,43 @@ func calculateProb(heights []float64) []float64 {
 }
 
 func drawMembershipFunction(res http.ResponseWriter, req *http.Request) {
-	seriesMembership := drawContinuousSeries(fmt.Sprintf("Membership function; Experts: %d", expertTab.Experts),
+	seriesMembership := fuzzy.DrawContinuousSeries(fmt.Sprintf("Membership function; Experts: %d", expertTab.Experts),
 		util.MapKeys(expertTab.Membership),
 		util.MapValues(expertTab.Membership))
 
-	seriesCore := drawContinuousSeries("Core",
+	seriesCore := fuzzy.DrawContinuousSeries("Core",
+
 		util.MapKeys(expertTab.Core),
 		util.MapValues(expertTab.Core))
 
-	seriesSupport := drawContinuousSeries("Support",
+	seriesSupport := fuzzy.DrawContinuousSeries("Support",
 		util.MapKeys(expertTab.Support),
 		util.MapValues(expertTab.Support))
 
-	seriesLimits := drawContinuousSeries("Limits",
+	seriesLimits := fuzzy.DrawContinuousSeries("Limits",
 		util.MapKeys(expertTab.Limit),
 		util.MapValues(expertTab.Limit))
 	series := make([]chart.Series, 0)
 	series = append(series, seriesMembership, seriesCore, seriesLimits, seriesSupport)
 
-	graph := drawChart(series)
-	renderChart(graph, res)
+	graph := fuzzy.DrawChart(series)
+	fuzzy.RenderChart(graph, res)
 }
 
 func drawApproximationTrapeze(res http.ResponseWriter, req *http.Request) {
-	series := drawContinuousSeries("Trapeze approximation function",
+	series := fuzzy.DrawContinuousSeries("Trapeze approximation function",
 		expertTab.FuzzySet,
 		appr.Trapezoidal(expertTab.FuzzySet, 165, 170, 180, 185))
 
-	graph := drawChart([]chart.Series{series})
-	renderChart(graph, res)
+	graph := fuzzy.DrawChart([]chart.Series{series})
+	fuzzy.RenderChart(graph, res)
 }
 
 func drawApproximationTriangle(res http.ResponseWriter, req *http.Request) {
-	series := drawContinuousSeries("Triangle approximation function",
+	series := fuzzy.DrawContinuousSeries("Triangle approximation function",
 		expertTab.FuzzySet,
 		appr.Triangular(expertTab.FuzzySet, 160, 175, 190))
 
-	graph := drawChart([]chart.Series{series})
-	renderChart(graph, res)
+	graph := fuzzy.DrawChart([]chart.Series{series})
+	fuzzy.RenderChart(graph, res)
 }
