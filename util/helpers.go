@@ -29,13 +29,14 @@ func MapValues(m map[float64]float64) []float64 {
 	return values
 }
 
-func MaxInSlice(slice []float64) (float64, bool) {
+func MaxInSlice(slice []float64) float64 {
 	sort.Float64s(slice)
-	max := slice[len(slice)-1]
-	if max == 1.0 {
-		return max, true
-	}
-	return max, false
+	return slice[len(slice)-1]
+}
+
+func MinInSlice(slice []float64) float64 {
+	sort.Float64s(slice)
+	return slice[0]
 }
 
 func SetHeights(minHeight, maxHeight, increment uint8) (heights []float64, err error) {

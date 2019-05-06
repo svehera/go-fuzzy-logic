@@ -15,7 +15,8 @@ import (
 var expertTab = CalculateExpertTable(Experts)
 
 func CalculateExpertTable(experts int) *fuzzy.ExpertTable {
-	expertTable := fuzzy.NewExpertTable(experts, util.SetHeights(150, 200, 5))
+	heights, _ := util.SetHeights(150, 200, 5)
+	expertTable := fuzzy.NewExpertTable(experts, heights)
 	expertTable.FillResultTable(calculateProb)
 	expertTable.CalculateMembership()
 
@@ -84,9 +85,9 @@ func drawApproximationTrapeze(res http.ResponseWriter, req *http.Request) {
 
 func drawApproximationTriangle(res http.ResponseWriter, req *http.Request) {
 	series := fuzzy.DrawContinuousSeries("Triangle approximation function",
-		expertTab.FuzzySet,
-		appr.Triangular(expertTab.FuzzySet, 160, 175, 190))
-
+		util.MapKeys(expertTab.Membership),
+		//	appr.Triangular(expertTab.FuzzySet, 160, 175, 190))
+		appr.Triangular(expertTab.Membership))
 	graph := fuzzy.DrawChart([]chart.Series{series})
 	fuzzy.RenderChart(graph, res)
 }
