@@ -5,8 +5,10 @@ import (
 	"github.com/svehera/go-fuzzy-logic/util"
 )
 
+type Triangular string
+
 // Triangular represents triangular Pi-approximation membership function
-func Triangular(support map[float64]float64) []float64 {
+func (t Triangular) Approximate(support map[float64]float64) []float64 {
 	//func Triangular(x []float64, a, b, c float64) []float64 {
 	y := make([]float64, 0)
 	a, b, c := getParamsTrinagular(support)
@@ -32,7 +34,7 @@ func Triangular(support map[float64]float64) []float64 {
 func Trapezoidal(xs []float64, a, b, c, d float64) []float64 {
 	//func Trapezoidal(xs []float64, a, b, c, d float64) []float64 {
 	y := make([]float64, 0)
-	a, b, c, d := getParamsTrap(support)
+	//a, b, c, d = getParamsTrap(support)
 	for _, x := range xs {
 		if x <= a {
 			y = append(y, 0)

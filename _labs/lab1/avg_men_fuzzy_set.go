@@ -74,6 +74,18 @@ func drawMembershipFunction(res http.ResponseWriter, req *http.Request) {
 	fuzzy.RenderChart(graph, res)
 }
 
+func drawApproximation(rawData map[float64]float64, ap appr.Interface, name string) http.HandlerFunc {
+	return func(res http.ResponseWriter, req *http.Request) {
+		series := fuzzy.DrawContinuousSeries(name,
+			util.MapKeys(rawData),
+			ap.Approximate(rawData))
+
+		graph := fuzzy.DrawChart([]chart.Series{series})
+		fuzzy.RenderChart(graph, res)
+	}
+
+}
+
 func drawApproximationTrapeze(res http.ResponseWriter, req *http.Request) {
 	series := fuzzy.DrawContinuousSeries("Trapeze approximation function",
 		expertTab.FuzzySet,
@@ -83,6 +95,7 @@ func drawApproximationTrapeze(res http.ResponseWriter, req *http.Request) {
 	fuzzy.RenderChart(graph, res)
 }
 
+/*
 func drawApproximationTriangle(res http.ResponseWriter, req *http.Request) {
 	series := fuzzy.DrawContinuousSeries("Triangle approximation function",
 		util.MapKeys(expertTab.Membership),
@@ -90,4 +103,4 @@ func drawApproximationTriangle(res http.ResponseWriter, req *http.Request) {
 		appr.Triangular(expertTab.Membership))
 	graph := fuzzy.DrawChart([]chart.Series{series})
 	fuzzy.RenderChart(graph, res)
-}
+}*/

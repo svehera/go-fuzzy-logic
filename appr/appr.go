@@ -4,6 +4,10 @@ import (
 	"sort"
 )
 
+type Interface interface {
+	Approximate(map[float64]float64) []float64
+}
+
 func getParamsTrinagular(input map[float64]float64) (a, b, c float64) {
 	sorted := SortMapByValue(input)
 	a = sorted[2].Key
