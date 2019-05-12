@@ -1,10 +1,21 @@
 package appr
 
-// Triangular represents triangular Pi-approximation membership function
-func Triangular(x []float64, a, b, c float64) []float64 {
-	y := make([]float64, 0)
+import (
+	"fmt"
+	"github.com/svehera/go-fuzzy-logic/util"
+)
 
-	for _, v := range x {
+type Triangular string
+
+// Triangular represents triangular Pi-approximation membership function
+func (t Triangular) Approximate(support map[float64]float64) []float64 {
+	//func Triangular(x []float64, a, b, c float64) []float64 {
+	y := make([]float64, 0)
+	a, b, c := getParamsTrinagular(support)
+	fmt.Printf("a=%f b=%f c=%f\n ", a, b, c)
+	//a, b, c := 0.0, 0.0, 0.0
+
+	for _, v := range util.MapKeys(support) {
 		if v <= a {
 			y = append(y, 0)
 		} else if v >= a && v <= b {
@@ -21,8 +32,9 @@ func Triangular(x []float64, a, b, c float64) []float64 {
 
 // Trapezoidal represents trapezoidal Pi-approximation membership function
 func Trapezoidal(xs []float64, a, b, c, d float64) []float64 {
+	//func Trapezoidal(xs []float64, a, b, c, d float64) []float64 {
 	y := make([]float64, 0)
-
+	//a, b, c, d = getParamsTrap(support)
 	for _, x := range xs {
 		if x <= a {
 			y = append(y, 0)

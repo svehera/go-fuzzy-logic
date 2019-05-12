@@ -16,8 +16,9 @@ func NewExpertTable(experts int, fuzzySet []float64) *ExpertTable {
 }
 
 func (et *ExpertTable) FillResultTable(estimate func(fuzzySet []float64) []float64) {
-	et.ResultTable = make([][]float64, et.Experts*len(et.FuzzySet))
+	et.ResultTable = make([][]float64, et.Experts)
 	for i := range et.ResultTable {
+		et.ResultTable[i] = make([]float64, len(et.FuzzySet))
 		et.ResultTable[i] = estimate(et.FuzzySet)
 	}
 }

@@ -34,7 +34,7 @@ func DetermineSetSupport(membership map[float64]float64) (support map[float64]fl
 	support = make(map[float64]float64)
 	for k, mu := range membership {
 		if mu > 0 {
-			support[k] = 0.03 // minus " 0.03" used to draw series a bit above 0
+			support[k] = mu // minus " 0.03" used to draw series a bit above 0
 		}
 	}
 	return
